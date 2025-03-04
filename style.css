@@ -148,19 +148,19 @@ p {
     background-image: url('/africa1.jpg');
 }
 
-/* .slide:nth-child(4) {
-    background-image: url('/api/placeholder/1200/800');
+.slide:nth-child(4) {
+    background-image: url('/africa2.webp');
 }
 
-.slide:nth-child(5) {
+/* .slide:nth-child(5) {
     background-image: url('/api/placeholder/1200/800');
 } */
 
 @keyframes slideshow {
-    0%, 20% { margin-left: 0; }
-    25%, 45% { margin-left: -100%; }
-    50%, 70% { margin-left: -200%; }
-    75%, 95% { margin-left: -300%; }
+    0%, 15% { margin-left: 0; }
+    20%, 40% { margin-left: -100%; }
+    45%, 65% { margin-left: -200%; }
+    70%, 90% { margin-left: -300%; }
     100% { margin-left: -400%; }
 }
 
