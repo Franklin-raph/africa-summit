@@ -48,12 +48,14 @@ document.getElementById('event-registration').addEventListener('submit', async f
     const company = document.getElementById('company').value;
     const country = document.getElementById('country').value;
     const sector = document.getElementById('sector').value;
+    console.log({ full_name:name, email, phone, organization:company, sector, country });
     
     // Show loading indicator
     const submitButton = this.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
     submitButton.disabled = true;
     submitButton.innerHTML = '<span class="loading-spinner"></span> Processing...';
+    
     
     try {
         // Make API call
@@ -62,7 +64,7 @@ document.getElementById('event-registration').addEventListener('submit', async f
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, email, phone, company, sector, country })
+            body: JSON.stringify({ full_name:name, email, phone, organization:company })
         });
         
         const data = await res.json();
