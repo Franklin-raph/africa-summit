@@ -64,20 +64,20 @@ document.getElementById('event-registration').addEventListener('submit', async f
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ full_name:name, email, phone, organization:company })
+            body: JSON.stringify({ full_name:name, email, phone, organization:company, sector, country })
         });
         
         const data = await res.json();
         console.log(res, data);
         
         // Show success message
-        alert('Thank you for registering! We\'ll send you a confirmation email shortly.');
+        alert(data?.message);
         
         // Reset form
         this.reset();
     } catch (error) {
         console.error('Error submitting form:', error);
-        alert('There was an error processing your registration. Please try again later.');
+        alert(data?.message);
     } finally {
         // Hide loading indicator and restore button
         submitButton.disabled = false;
