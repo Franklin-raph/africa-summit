@@ -339,8 +339,14 @@ p {
     text-align: center;
 }
 
+.form-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+}
+
 .registration-form {
-    max-width: 600px;
+    /* max-width: 600px; */
     margin: 0 auto;
     background-color: white;
     padding: 40px;
@@ -359,7 +365,7 @@ p {
     text-align: left;
 }
 
-.form-group input {
+.form-group input, .form-group select {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -484,6 +490,29 @@ button[type="submit"]:hover {
     margin: 30px auto 0;
 }
 
+/* Loading Spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Disabled button styling */
+button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 /* Responsive styles */
 @media (max-width: 992px) {
 
@@ -561,9 +590,22 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 576px) {
+
+    .cta h2 {
+        font-size: 1.5rem;
+    }
+
+    .cta p {
+        font-size: 1rem;
+    }
+
     .navbar-container {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .form-container{
+        grid-template-columns: 1fr;
     }
     
     .nav-links {

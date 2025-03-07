@@ -37,7 +37,8 @@ updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
 // Form Submission
-document.getElementById('event-registration').addEventListener('submit', function(e) {
+// Form Submission with Loading Indicator
+document.getElementById('event-registration').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     // Get form values
@@ -45,13 +46,39 @@ document.getElementById('event-registration').addEventListener('submit', functio
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const company = document.getElementById('company').value;
+    const country = document.getElementById('country').value;
+    const sector = document.getElementById('sector').value;
     
-    // In a real application, you would send this data to your server
-    console.log('Form submitted with:', { name, email, phone, company });
+    // Show loading indicator
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="loading-spinner"></span> Processing...';
     
-    // Display success message (in a real app, you would do this after successful API response)
-    alert('Thank you for registering! We\'ll send you a confirmation email shortly.');
-    
-    // Reset form
-    this.reset();
+    try {
+        // Make API call
+        const res = await fetch('https://arm.yamltech.com/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, phone, company, sector, country })
+        });
+        
+        const data = await res.json();
+        console.log(res, data);
+        
+        // Show success message
+        alert('Thank you for registering! We\'ll send you a confirmation email shortly.');
+        
+        // Reset form
+        this.reset();
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error processing your registration. Please try again later.');
+    } finally {
+        // Hide loading indicator and restore button
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+    }
 });
