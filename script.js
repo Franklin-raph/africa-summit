@@ -84,3 +84,46 @@ document.getElementById('event-registration').addEventListener('submit', async f
         submitButton.textContent = originalButtonText;
     }
 });
+
+// Add this code to your existing script.js file
+
+// Function to fetch countries and populate dropdown
+async function populateCountryDropdown() {
+    const countryDropdown = document.getElementById('country');
+    
+    // Show loading state
+    countryDropdown.innerHTML = '<option value="">Loading countries...</option>';
+    
+    try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        const countries = await response.json();
+        
+        // Sort countries alphabetically by name
+        countries.sort((a, b) => {
+            const nameA = a.name.common.toUpperCase();
+            const nameB = b.name.common.toUpperCase();
+            return nameA.localeCompare(nameB);
+        });
+        
+        // Create default option
+        let options = '<option value="">Select Your Country</option>';
+        
+        // Add all countries to dropdown
+        countries.forEach(country => {
+            options += `<option value="${country.name.common}">${country.name.common}</option>`;
+        });
+        
+        // Update dropdown
+        countryDropdown.innerHTML = options;
+    } catch (error) {
+        console.error('Error fetching countries:', error);
+        countryDropdown.innerHTML = '<option value="">Error loading countries</option>';
+    }
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    populateCountryDropdown();
+    
+    // The rest of your existing DOMContentLoaded code can remain here
+});

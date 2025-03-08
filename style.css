@@ -503,6 +503,28 @@ button[type="submit"]:hover {
     vertical-align: middle;
 }
 
+/* Add these styles to your existing CSS file */
+select#country {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    max-height: 300px;
+}
+
+/* Optional styling for dropdown arrow */
+select#country {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
